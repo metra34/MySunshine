@@ -1,6 +1,8 @@
 package com.example.android.sunshine;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by artem on 4/20/2016.
@@ -18,6 +20,11 @@ public class WeatherDataParser {
         throws JSONException {
         // TODO: add parsing code here
 
-        return -1;
+        JSONObject weather = new JSONObject(weatherJsonStr);
+        JSONArray days = weather.getJSONArray("list");
+        JSONObject dayInfo = days.getJSONObject(dayIndex);
+        JSONObject temperatureInfo = dayInfo.getJSONObject("temp");
+
+        return temperatureInfo.getDouble("max");
     }
 }
